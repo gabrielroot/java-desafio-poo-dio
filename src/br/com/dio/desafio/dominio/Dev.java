@@ -19,12 +19,14 @@ public class Dev {
 
     public void progredir() {
         Optional<Conteudo> conteudo = this.conteudosInscritos.stream().findFirst();
-        if(conteudo.isPresent()) {
-            this.conteudosConcluidos.add(conteudo.get());
-            this.conteudosInscritos.remove(conteudo.get());
-        } else {
+
+        if (conteudo.isEmpty()) {
             System.err.println("Você não está matriculado em nenhum conteúdo!");
+            return;
         }
+
+        this.conteudosConcluidos.add(conteudo.get());
+        this.conteudosInscritos.remove(conteudo.get());
     }
 
     public double calcularTotalXp() {
@@ -35,11 +37,6 @@ public class Dev {
             soma += next;
         }
         return soma;
-
-        /*return this.conteudosConcluidos
-                .stream()
-                .mapToDouble(Conteudo::calcularXp)
-                .sum();*/
     }
 
 
